@@ -3,14 +3,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from .routers import calendars
 
-import os.path
-
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-
+import logging
 
 
 app = FastAPI()
@@ -28,4 +21,5 @@ app.add_middleware(
 )
 app.include_router(calendars.router)
 
-SCOPES = ['https://www.googleapis.com/auth/contacts.readonly']
+# Create a logger object
+logging.basicConfig(filename='execution_log.log', encoding='utf-8', format='%(levelname)s %(asctime)s %(message)s', datefmt='%Y.%m.%d %H:%M:%S', level=logging.DEBUG)
